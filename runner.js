@@ -62,7 +62,6 @@ async function runStep(client, botNumber, step) {
   try {
     // Send message
     const message = String(step.send);
-    const contact = await client.getContactById(botNumber);
     await client.sendMessage(botNumber, message);
     console.log(`Sent to ${botNumber}: ${message}`);
 
@@ -91,14 +90,19 @@ async function runStep(client, botNumber, step) {
 
 async function waitForReply(client, botNumber, timeout) {
   return new Promise((resolve) => {
+    const cleanup = () => {
+      clearTimeout(timer);
+      client.removeListener('message', messageHandler);
+    };
+
     const timer = setTimeout(() => {
+      cleanup();
       resolve(null);
     }, timeout);
 
     const messageHandler = (message) => {
       if (message.from === botNumber && !message.fromMe) {
-        clearTimeout(timer);
-        client.removeListener('message', messageHandler);
+        cleanup();
         resolve(message.body);
       }
     };

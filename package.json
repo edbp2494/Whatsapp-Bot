@@ -1,17 +1,7 @@
 {
-  "name": "mi-tienda-qa",
+  "name": "whatsapp-bot",
   "version": "1.0.0",
-  "description": "QA bot for mi-tienda using WhatsApp",
   "main": "index.js",
-  "type": "commonjs",
-  "scripts": {
-    "start": "node index.js",
-    "test:all": "node index.js",
-    "test:flow": "node index.js --flow"
-  },
-  "keywords": ["qa", "whatsapp", "bot"],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "whatsapp-web.js": "^1.23.0",
     "qrcode-terminal": "^0.12.0",
